@@ -29,9 +29,9 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 
         registrationPage.submitStudentForm();
 
-        registrationPage.verifyResultsModalAppears()
-                .verifyResult("Student Name",
-                        newStudentData.getFirstName() + " " + newStudentData.getLastName())
+        registrationResultsModal.verifyModalAppears();
+
+        registrationResultsModal.verifyResult("Student Name", newStudentData.getFirstName() + " " + newStudentData.getLastName())
                 .verifyResult("Student Email", newStudentData.getEmail())
                 .verifyResult("Gender", newStudentData.getGender())
                 .verifyResult("Mobile", newStudentData.getPhone())
@@ -45,7 +45,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .verifyResult("Address", newStudentData.getCurrAddress())
                 .verifyResult("State and City", newStudentData.getState() + " " + newStudentData.getCity());
 
-        registrationPage.closeTableWithRegData();
+        registrationResultsModal.closeResultsTable();
 
     }
 }
