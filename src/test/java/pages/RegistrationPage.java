@@ -2,7 +2,6 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
-import pages.components.RegistrationResultsModal;
 
 import java.io.File;
 
@@ -14,7 +13,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationPage {
 
     private final CalendarComponent calendarComponent = new CalendarComponent();
-    private final RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
 
     private final SelenideElement firstNameInput = $("#firstName");
     private final SelenideElement lastNameInput = $("#lastName");

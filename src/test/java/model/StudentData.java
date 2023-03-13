@@ -148,11 +148,11 @@ public class StudentData {
     @Override
     public String toString() {
         return "StudentData{" +
-                ", firstName='" + firstName + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", birthday='" + birthDay + "." + birthMonth + "." + birthYear + '\'' +
+                ", birthday='" + birthDay + " " + birthMonth + " " + birthYear + '\'' +
                 ", gender='" + gender + '\'' +
                 ", hobby='" + hobby + '\'' +
                 ", state='" + state + '\'' +

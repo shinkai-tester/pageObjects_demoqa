@@ -8,30 +8,43 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class StudentDataGenerator {
 
     public static StudentData getRandomStudent() {
-        Faker data = new Faker();
+        Faker faker = new Faker();
 
-        String firstName = data.name().firstName();
-        String lastName = data.name().lastName();
-        String email = firstName + '.' + lastName + "@example.com";
-        String phone = data.phoneNumber().subscriberNumber(10);
-        LocalDate birthday = data.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        String month = StringUtils.capitalize(birthday.getMonth().name().toLowerCase());
-        String year = Integer.toString(birthday.getYear());
-        String day = birthday.format(DateTimeFormatter.ofPattern("dd"));
-        String[] genders = new String[]{"Male", "Female", "Other"};
-        String gender = getRndValueArr(genders);
-        String[] hobbies = new String[]{"Sports", "Reading", "Music"};
-        String hobby = getRndValueArr(hobbies);
-        String currAddress = data.address().streetAddress();
+        String[] genders = new String[]{"Male", "Female", "Other"},
+                hobbies = new String[]{"Sports", "Reading", "Music"},
+                subjects = {"Maths", "Arts", "Accounting", "English", "Social Studies", "Computer Science",
+                        "Commerce", "Economics", "Chemistry", "Biology", "Physics", "Civics", "Hindi", "History"};
+
+
+        LocalDate birthday = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
         File photo = new File("src/test/resources/photos/Bugcat_Capoo.jpg");
-        String subject = "Computer Science";
-        String state = "Haryana";
-        String city = "Karnal";
+
+        Map<String, String[]> statesAndCities =
+                Map.of("NCR",new String[]{"Delhi", "Gurgaon", "Noida"},
+                        "Uttar Pradesh", new String[]{"Agra", "Lucknow", "Merrut"},
+                        "Haryana", new String[]{"Karnal", "Panipat"},
+                        "Rajasthan", new String[]{"Jaipur", "Jaiselmer"});
+
+        String firstName = faker.name().firstName(),
+                lastName = faker.name().lastName(),
+                email = firstName + '.' + lastName + "@example.com",
+                phone = faker.phoneNumber().subscriberNumber(10),
+                month = StringUtils.capitalize(birthday.getMonth().name().toLowerCase()),
+                year = Integer.toString(birthday.getYear()),
+                day = birthday.format(DateTimeFormatter.ofPattern("dd")),
+                gender = faker.options().nextElement(genders),
+                hobby = faker.options().nextElement(hobbies),
+                currAddress = faker.address().streetAddress(),
+                subject = faker.options().nextElement(subjects),
+                state = faker.options().nextElement(new ArrayList<>(statesAndCities.keySet())),
+                city = faker.options().nextElement(statesAndCities.get(state));
 
         return new StudentData()
                 .withFirstName(firstName)
@@ -48,10 +61,5 @@ public class StudentDataGenerator {
                 .withSubject(subject)
                 .withState(state)
                 .withCity(city);
-    }
-
-    public static String getRndValueArr(String[] arr) {
-        int rnd = new Random().nextInt(arr.length);
-        return arr[rnd];
     }
 }
