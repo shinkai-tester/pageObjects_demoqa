@@ -9,8 +9,11 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     void fillAllDataTest() {
         StudentData newStudentData = StudentDataGenerator.getRandomStudent();
 
-        registrationPage.openPage()
-                .setFirstName(newStudentData.getFirstName())
+        registrationPage.openPage();
+
+        registrationPage.removeBanAndFooter();
+
+        registrationPage.setFirstName(newStudentData.getFirstName())
                 .setLastName(newStudentData.getLastName())
                 .setEmail(newStudentData.getEmail())
                 .setGender(newStudentData.getGender())

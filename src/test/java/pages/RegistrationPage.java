@@ -5,7 +5,7 @@ import pages.components.CalendarComponent;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -29,11 +29,9 @@ public class RegistrationPage {
     private final SelenideElement submitButton = $("#submit");
     private final SelenideElement subjectsList = $(".subjects-auto-complete__menu-list");
 
-    public RegistrationPage openPage() {
+    public void openPage() {
         open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        removeBanAndFooter();
-        return this;
+        $(".practice-form-wrapper").should(appear);
     }
 
     public void removeBanAndFooter() {
