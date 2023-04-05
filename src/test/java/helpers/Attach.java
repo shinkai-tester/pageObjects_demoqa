@@ -14,17 +14,18 @@ import static org.openqa.selenium.logging.LogType.BROWSER;
 
 public class Attach {
     @Attachment(value = "{attachName}", type = "image/png")
-    public static void screenshotAs(String attachName) {
+    public static byte[] screenshotAs(String attachName) {
         ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "Page source", type = "text/plain")
-    public static void pageSource() {
+    public static byte[] pageSource() {
         getWebDriver().getPageSource();
     }
 
     @Attachment(value = "{attachName}", type = "text/plain")
-    public static void attachAsText(String attachName, String message) {
+    public static String attachAsText(String attachName, String message) {
+        return message;
     }
 
     public static void browserConsoleLogs() {
