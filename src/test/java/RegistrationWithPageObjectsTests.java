@@ -1,4 +1,5 @@
 import generators.StudentDataGenerator;
+import helpers.Attach;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -67,6 +68,8 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                     .verifyResult("Picture", newStudentData.getPhoto().getName())
                     .verifyResult("Address", newStudentData.getCurrAddress())
                     .verifyResult("State and City", newStudentData.getState() + " " + newStudentData.getCity());
+
+            Attach.screenshotAs("Screenshot of the table with all student's data");
         });
 
         step("Close table with all student's data and end registration", () -> {
