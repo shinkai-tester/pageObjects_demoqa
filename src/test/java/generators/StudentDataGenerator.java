@@ -5,7 +5,6 @@ import model.StudentData;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +14,7 @@ import java.util.Objects;
 
 public class StudentDataGenerator {
 
-    public static StudentData getRandomStudent() throws URISyntaxException {
+    public static StudentData getRandomStudent() {
         Faker faker = new Faker();
         ClassLoader classLoader = StudentDataGenerator.class.getClassLoader();
 
@@ -35,8 +34,8 @@ public class StudentDataGenerator {
                         "Haryana", new String[]{"Karnal", "Panipat"},
                         "Rajasthan", new String[]{"Jaipur", "Jaiselmer"});
 
-        String firstName = faker.name().firstName(),
-                lastName = faker.name().lastName(),
+        String firstName = clean(faker.name().firstName()),
+                lastName = clean(faker.name().lastName()),
                 email = firstName + '.' + lastName + "@example.com",
                 phone = faker.phoneNumber().subscriberNumber(10),
                 month = StringUtils.capitalize(birthday.getMonth().name().toLowerCase()),
@@ -64,5 +63,9 @@ public class StudentDataGenerator {
                 .withSubject(subject)
                 .withState(state)
                 .withCity(city);
+    }
+
+    private static String clean(String text) {
+        return text.replace("'", " ");
     }
 }

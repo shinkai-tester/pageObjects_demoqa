@@ -9,8 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.net.URISyntaxException;
-
 import static io.qameta.allure.Allure.step;
 
 public class RegistrationWithPageObjectsTests extends TestBase {
@@ -22,7 +20,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     @Severity(SeverityLevel.BLOCKER)
     @Link(value = "DEMOQA Practice Form", url = "https://demoqa.com/automation-practice-form")
     @DisplayName("Fill all data in Student Registration Form and submit it")
-    void fillAllDataTest() throws URISyntaxException {
+    void fillAllDataTest() {
         StudentData newStudentData = StudentDataGenerator.getRandomStudent();
 
         step("Open Student Registration Form", () -> {
