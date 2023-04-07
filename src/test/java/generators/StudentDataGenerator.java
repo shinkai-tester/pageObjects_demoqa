@@ -27,8 +27,6 @@ public class StudentDataGenerator {
 
         LocalDate birthday = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        System.out.println(new File(classLoader.getResource("photos/Bugcat_Capoo.jpg").toURI()).getPath());
-
         File photo = new File(Objects.requireNonNull(classLoader.getResource("photos/Bugcat_Capoo.jpg")).getFile());
 
         Map<String, String[]> statesAndCities =
