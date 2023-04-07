@@ -10,11 +10,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 public class StudentDataGenerator {
 
     public static StudentData getRandomStudent() {
         Faker faker = new Faker();
+        ClassLoader classLoader = StudentDataGenerator.class.getClassLoader();
 
         String[] genders = new String[]{"Male", "Female", "Other"},
                 hobbies = new String[]{"Sports", "Reading", "Music"},
@@ -24,7 +26,7 @@ public class StudentDataGenerator {
 
         LocalDate birthday = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        File photo = new File("src/test/resources/photos/Bugcat_Capoo.jpg");
+        File photo = new File(Objects.requireNonNull(classLoader.getResource("photos/Bugcat_Capoo.jpg")).getFile());
 
         Map<String, String[]> statesAndCities =
                 Map.of("NCR",new String[]{"Delhi", "Gurgaon", "Noida"},
