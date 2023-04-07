@@ -5,6 +5,7 @@ import model.StudentData;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 public class StudentDataGenerator {
 
-    public static StudentData getRandomStudent() {
+    public static StudentData getRandomStudent() throws URISyntaxException {
         Faker faker = new Faker();
         ClassLoader classLoader = StudentDataGenerator.class.getClassLoader();
 
@@ -26,7 +27,7 @@ public class StudentDataGenerator {
 
         LocalDate birthday = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        System.out.println(new File("photos/Bugcat_Capoo.jpg").getAbsoluteFile());
+        System.out.println(new File(classLoader.getResource("photos/Bugcat_Capoo.jpg").toURI()).getPath());
 
         File photo = new File(Objects.requireNonNull(classLoader.getResource("photos/Bugcat_Capoo.jpg")).getFile());
 
