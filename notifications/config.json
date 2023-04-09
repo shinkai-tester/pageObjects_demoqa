@@ -1,0 +1,17 @@
+{
+  "base": {
+    "logo": "",
+    "project": "QA.GURU 18",
+    "environment": "DEMOQA",
+    "comment": "Hello @alin_laegnor, there is allure notification on DEMOQA tests",
+    "reportLink": "https://jenkins.autotests.cloud",
+    "language": "en",
+    "allureFolder": "build/reports/allure-report/allureReport",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "bot_token",
+    "chat": "chat_id",
+    "replyTo": ""
+  }
+}
