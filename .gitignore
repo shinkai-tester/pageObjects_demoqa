@@ -14,3 +14,4 @@ build/
 
 ### Logs ###
 *.log
+/notifications/private.txt
