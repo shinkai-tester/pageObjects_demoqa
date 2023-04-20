@@ -1,36 +1,20 @@
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.WebDriverProvider;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.RegistrationPage;
 import pages.components.RegistrationResultsModal;
-
-import java.util.Map;
 
 public class TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
 
     @BeforeAll
-    static void beforeAll() {
-        String[] browserWithVersion = System.getProperty("browserWithVersion", "chrome: 100.0").split(": ");
-
-        Configuration.baseUrl = System.getProperty("base_url", "https://demoqa.com");
-        Configuration.browser = browserWithVersion[0];
-        Configuration.browserVersion = browserWithVersion[1];
-        Configuration.browserSize = System.getProperty("browser_size", "1920x1080");
-        Configuration.remote = "https://user1:1234@" + System.getProperty("selenoid", "selenoid.autotests.cloud") + "/wd/hub";
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+    static void setUp() {
+        WebDriverProvider.config();
     }
 
     @BeforeEach
@@ -40,8 +24,8 @@ public class TestBase {
 
     @AfterEach
     void addAttachments(){
+        Attach.addVideo();
         Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
     }
 }
