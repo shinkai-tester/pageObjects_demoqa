@@ -7,9 +7,9 @@ import org.aeonbits.owner.Config;
 })
 
 public interface AuthConfig extends Config {
-    @Key("username.selenide")
+    @Key("username.selenoid")
     String remote_username();
 
-    @Key("password.selenide")
+    @Key("password.selenoid")
     String remote_password();
 }

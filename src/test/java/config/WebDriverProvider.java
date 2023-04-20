@@ -17,7 +17,10 @@ public class WebDriverProvider {
         String[] browserWithVersion = WebDriverProvider.config.getBrowserAndVersion();
         Configuration.browser = browserWithVersion[0];
         Configuration.browserVersion = browserWithVersion[1];
-        Configuration.remote = "https://" + authconfig.remote_username() + ":" + authconfig.remote_password() + "@" + WebDriverProvider.config.getRemoteUrl() + "/wd/hub";
+        String remoteUrl = WebDriverProvider.config.getRemoteUrl();
+        if (remoteUrl != null) {
+            Configuration.remote = "https://" + WebDriverProvider.authconfig.remote_username() + ":" + WebDriverProvider.authconfig.remote_password() + "@" + remoteUrl  + "/wd/hub";
+        }
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
